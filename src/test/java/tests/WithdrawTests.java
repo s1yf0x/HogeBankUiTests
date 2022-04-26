@@ -49,21 +49,19 @@ public class WithdrawTests extends BaseTest {
     }
 
     @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for signup withdraw")
-    public void checkCalculationDeposit(String withdraw) {
+    public void checkCalculationCommission(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
         Assert.assertTrue(mainPage.clickToWithdraw().typeWithdraw(Double.parseDouble(withdraw)).checkCommission(Double.parseDouble(withdraw)), "Commission calculated wrong");
     }
 
     @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for signup withdraw")
     public void checkAccountBalance(String withdraw) {
-        double startBalance;
-        double endBalance;
-        double sumOfWithdrawAndCommission;
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
-        startBalance = mainPage.getCurrentBalance();
-        sumOfWithdrawAndCommission = mainPage.clickToWithdraw().typeWithdraw(Double.parseDouble(withdraw)).calculateWithdrawAndCommission(Double.parseDouble(withdraw));
-        endBalance = withdrawPage.clickWithdraw().waitForRenewalBalance(startBalance).getCurrentBalance();
+        double startBalance = mainPage.getCurrentBalance();
+        double sumOfWithdrawAndCommission = mainPage.clickToWithdraw().typeWithdraw(Double.parseDouble(withdraw)).calculateWithdrawAndCommission(Double.parseDouble(withdraw));
+        double endBalance = withdrawPage.clickWithdraw().waitForRenewalBalance(startBalance).getCurrentBalance();
         Assert.assertEquals(endBalance, startBalance-sumOfWithdrawAndCommission, "Balance after withdraw is correct");
     }
+    //TODO: Add negative tests
 
 }
