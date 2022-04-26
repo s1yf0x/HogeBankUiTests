@@ -17,9 +17,9 @@ public class SignUpTests extends BaseTest {
     SignupPage signupPage;
     MainPage mainPage;
 
-    User userValid = new User(generator.generateUsername(false), generator.generatePassword(10, true, true, true));;
+    User userValid = new User(generator.generateUsername(false), generator.generatePassword(10, true, true, true));
     User userBlankUsername = new User("", generator.generatePassword(10, true, true, true));
-    User userWhiteSpaceUsername = new User(generator.generateUsername(true), generator.generatePassword(10, true, true, true));;
+    User userWhiteSpaceUsername = new User(generator.generateUsername(true), generator.generatePassword(10, true, true, true));
     User userLess8CharsPassword = new User(generator.generateUsername(false), generator.generatePassword(5, true, true, true));
     User userMore32CharsPassword = new User(generator.generateUsername(false), generator.generatePassword(35, true, true, true));
     User userWithoutDigitsPassword = new User(generator.generateUsername(false), generator.generatePassword(10, true, true, false));
@@ -53,20 +53,14 @@ public class SignUpTests extends BaseTest {
 
     @Test(groups = "SignUp", description = "Positive test for signup process")
     public void positiveSignUpTest() {
-        loginPage.clickSignupBtn()
-                .typeUsername(userValid.getUsername())
-                .typePassword(userValid.getPassword())
-                .clickSignupBtn();
+        signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
         Assert.assertEquals(mainPage.getLblUsername(), userValid.getUsername(), "User not logged after signup or show invalid username of Main page");
     }
 
     @Test(groups = "SignUp", dataProvider = "getCredentials",  description = "Test for signup process")
     public void negativeSignUpTests(String username, String password, String expectedResult) {
-        loginPage.clickSignupBtn()
-                .typeUsername(username)
-                .typePassword(password)
-                .clickSignupBtn();
+        signupPage.signupThenLogin(username, password);
 
         Assert.assertEquals(signupPage.getLblErrorText(), expectedResult, "Didn't get error about invalid username or password");
     }

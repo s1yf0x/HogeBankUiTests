@@ -59,4 +59,16 @@ public class Configuration {
     public String getErrorMustContainUpperCasePassword() {
         return props.getProperty("errorMustContainUpperCase");
     }
+
+    public double getWithdrawCommission() {
+        return Double.parseDouble(props.getProperty("withdrawCommission"));
+    }
+    public double getDepositCommission() {
+        return Double.parseDouble(props.getProperty("depositCommission"));
+    }
+
+    public String getErrorBlankWithdraw() {
+        return props.getProperty("ErrorBlankWithdraw");
+    }
+
 }

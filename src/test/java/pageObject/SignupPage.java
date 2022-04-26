@@ -9,6 +9,8 @@ public class SignupPage extends PageObject {
 
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
 
+    LoginPage loginPage = new LoginPage(driver);
+
     private final By title = By.xpath("//h1[@class='center']");
     private final By fldUsername = By.xpath("//input[1]");
     private final By fldPassword = By.xpath("//input[@type='password']");
@@ -31,14 +33,21 @@ public class SignupPage extends PageObject {
         return new SignupPage(driver);
     }
 
-    public SignupPage clickSignupBtn() {
+    public MainPage clickSignupBtn() {
         wait.until(ExpectedConditions.elementToBeClickable(btnSignup));
         driver.findElement(btnSignup).click();
-        return new SignupPage(driver);
+        return new MainPage(driver);
     }
 
     public String getLblErrorText() {
         wait.until(ExpectedConditions.elementToBeClickable(lblError));
         return driver.findElement(lblError).getText();
+    }
+
+    public MainPage signupThenLogin(String username, String password) {
+        return loginPage.clickSignupBtn()
+                .typeUsername(username)
+                .typePassword(password)
+                .clickSignupBtn();
     }
 }
