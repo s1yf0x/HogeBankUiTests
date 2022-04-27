@@ -14,17 +14,19 @@ public class WithdrawPage extends PageObject {
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
 
     private final By title = By.xpath("//h1[@class='center']");
-    private final By btnDeposit = By.xpath("//button[normalize-space()='Withdraw']");
-    private final By fldDeposit = By.xpath("//div[@class='center']//input");
+    private final By btnWithdraw = By.xpath("//button[normalize-space()='Withdraw']");
+    private final By fldWithdraw = By.xpath("//div[@class='center']//input");
     private final By lblCommission = By.xpath("//span[4]");
+    private final By lblFinalWithdraw = By.xpath("//span[6]");
+    private final By lblErrorFailed = By.xpath("//span[@color='red']");
 
     public double getCommission() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(lblCommission));
         return Double.parseDouble(driver.findElement(lblCommission).getText());
     }
 
-    public WithdrawPage typeWithdraw(double withdraw) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(fldDeposit)).sendKeys(String.valueOf(withdraw));
+    public WithdrawPage typeWithdraw(String withdraw) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fldWithdraw)).sendKeys(withdraw);
         return new WithdrawPage(driver);
     }
 
@@ -37,12 +39,21 @@ public class WithdrawPage extends PageObject {
     }
 
     public MainPage clickWithdraw() {
-        wait.until(ExpectedConditions.elementToBeClickable(btnDeposit)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(btnWithdraw)).click();
         return new MainPage(driver);
     }
 
-    public double calculateWithdrawAndCommission(double withdraw) {
+    public double calculateFinalWithdraw(double withdraw) {
         return getCommission()+withdraw;
+    }
+
+    public double getFinalWithdraw() {
+        return Double.parseDouble(wait.until(ExpectedConditions.visibilityOfElementLocated(lblFinalWithdraw)).getText());
+    }
+
+    public String getLblErrorText() {
+        wait.until(ExpectedConditions.elementToBeClickable(lblErrorFailed));
+        return driver.findElement(lblErrorFailed).getText();
     }
 
 }

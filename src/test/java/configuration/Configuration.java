@@ -67,8 +67,12 @@ public class Configuration {
         return Double.parseDouble(props.getProperty("depositCommission"));
     }
 
-    public String getErrorBlankWithdraw() {
-        return props.getProperty("ErrorBlankWithdraw");
+    public String getErrorWithdraw() {
+        return props.getProperty("ErrorWithdraw");
+    }
+
+    public String getErrorDeposit() {
+        return props.getProperty("ErrorDeposit");
     }
 
 }
