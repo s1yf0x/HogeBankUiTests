@@ -19,11 +19,11 @@ public class DepositPage extends PageObject {
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
 
     /**
-     * All locators not is best and application implemented so terrible. I would to ask developers add some additional
+     * This part could be improved, but it required actions by developers. I would to ask developers add some additional
      * attributes to needed elements for more stable tests
      */
     private final By title = By.xpath("//h1[@class='center']");
-    private final By btnDeposit = By.xpath("//button[normalize-space()='Deposit']");
+    private final By btnDeposit = By.xpath("//button[normalize-space()='Deposit']"); //example for improvement <button data-test-id="deposit">Deposit</button>
     private final By fldDeposit = By.xpath("//div[@class='center']//input");
     private final By lblCommission = By.xpath("//span[4]");
     private final By lblFinalDeposit = By.xpath("//span[6]");
