@@ -1,6 +1,5 @@
 # HogeBankUiTests
 ## Required Software
-### Prerequisites
 * Maven3 (https://maven.apache.org/download.cgi)
 * JDK 11 (https://www.oracle.com/cis/java/technologies/javase/jdk11-archive-downloads.html)
 * Chrome 88 or higher (https://www.google.com/chrome/)
