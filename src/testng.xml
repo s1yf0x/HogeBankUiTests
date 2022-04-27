@@ -5,6 +5,8 @@
     <test verbose="2" name="HogeBankTests" preserve-order="false">
         <classes>
             <class name="tests.SignUpTests" />
+            <class name="tests.WithdrawTests" />
+            <class name="tests.DepositTests" />
         </classes>
     </test>
 </suite>

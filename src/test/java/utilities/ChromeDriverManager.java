@@ -26,12 +26,6 @@ public class ChromeDriverManager extends DriverManager {
     private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
 
-
-       //Map<String, String> mobileEmulation = new HashMap<>();
-
-       //mobileEmulation.put("deviceName", "Pixel 2 XL");
-
-        //options.setExperimentalOption("mobileEmulation", mobileEmulation);
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
         options.addArguments("--disable-infobars");

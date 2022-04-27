@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.Helper;
 
 public class MainPage extends PageObject {
 
@@ -13,7 +12,6 @@ public class MainPage extends PageObject {
     }
 
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
-    Helper helper = new Helper();
 
     private final By title = By.xpath("//h1[@class='center']");
     private final By btnDeposit = By.xpath("//a[@href][1]");
