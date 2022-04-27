@@ -16,11 +16,12 @@ import utilities.User;
 public class WithdrawTests extends BaseTest {
 
     WebDriver driver;
-    Generator generator = new Generator();
     LoginPage loginPage;
     SignupPage signupPage;
     MainPage mainPage;
     WithdrawPage withdrawPage;
+
+    Generator generator = new Generator();
     User userValid = new User(generator.generateUsername(false), generator.generatePassword(10, true, true, true));
 
     @BeforeMethod(alwaysRun = true, description = "Get driver and url")
@@ -28,7 +29,6 @@ public class WithdrawTests extends BaseTest {
         driver = getDriver();
         driver.get(config.getUrl());
 
-        generator = new Generator();
         loginPage = new LoginPage(driver);
         signupPage = new SignupPage(driver);
         mainPage = new MainPage(driver);
@@ -58,30 +58,37 @@ public class WithdrawTests extends BaseTest {
     @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for calculating withdraw")
     public void checkCalculationCommission(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
+
         Assert.assertTrue(mainPage.clickToWithdraw().typeWithdraw(withdraw).checkCommission(Double.parseDouble(withdraw)), "Commission calculated wrong");
     }
 
     @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for balance after withdraw")
     public void checkAccountBalance(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
+
         double startBalance = mainPage.getCurrentBalance();
         double sumOfWithdrawAndCommission = mainPage.clickToWithdraw().typeWithdraw(withdraw).calculateFinalWithdraw(Double.parseDouble(withdraw));
         double endBalance = withdrawPage.clickWithdraw().waitForRenewalBalance(startBalance).getCurrentBalance();
+
         Assert.assertEquals(endBalance, startBalance-sumOfWithdrawAndCommission, "Balance after withdraw is correct");
     }
 
     @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for balance after withdraw")
     public void checkCalculationFinalWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
+
         double sumOfWithdrawAndCommission = mainPage.clickToWithdraw().typeWithdraw(withdraw).calculateFinalWithdraw(Double.parseDouble(withdraw));
         double finalWithdraw = withdrawPage.getFinalWithdraw();
+
         Assert.assertEquals(finalWithdraw, sumOfWithdrawAndCommission, "Final withdraw calculated wrong");
     }
 
     @Test(groups = "Withdraw", dataProvider = "getInvalidWithdraw",  description = "Test for getting error with invalid withdraw")
     public void invalidWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
+
         mainPage.clickToWithdraw().typeWithdraw(withdraw).clickWithdraw();
+
         Assert.assertEquals(withdrawPage.getLblErrorText(), config.getErrorWithdraw(), "Didn't get error about invalid username or password");
 
     }

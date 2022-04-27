@@ -1,6 +1,7 @@
 package utilities;
 
 public enum DriverFactory {
+
     CHROME {
         @Override
         public DriverManager getDriverManager() {

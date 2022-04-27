@@ -7,12 +7,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WithdrawPage extends PageObject {
 
+    /**
+     *     Decide not to create parent class for DepositPage.class and for WithdrawPage.class despite the similarity
+     *     'cause they can change and become completely different
+     */
+
     public WithdrawPage(WebDriver driver) {
         super(driver);
     }
 
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
 
+    /**
+     * All locators not is best and application implemented so terrible. I would to ask developers add some additional
+     * attributes to needed elements for more stable tests
+     */
     private final By title = By.xpath("//h1[@class='center']");
     private final By btnWithdraw = By.xpath("//button[normalize-space()='Withdraw']");
     private final By fldWithdraw = By.xpath("//div[@class='center']//input");

@@ -12,11 +12,11 @@ import utilities.User;
 public class SignUpTests extends BaseTest {
 
     WebDriver driver;
-    Generator generator = new Generator();
     LoginPage loginPage;
     SignupPage signupPage;
     MainPage mainPage;
 
+    Generator generator = new Generator();
     User userValid = new User(generator.generateUsername(false), generator.generatePassword(10, true, true, true));
     User userBlankUsername = new User("", generator.generatePassword(10, true, true, true));
     User userWhiteSpaceUsername = new User(generator.generateUsername(true), generator.generatePassword(10, true, true, true));
@@ -30,7 +30,6 @@ public class SignUpTests extends BaseTest {
         driver = getDriver();
         driver.get(config.getUrl());
 
-        generator = new Generator();
         loginPage = new LoginPage(driver);
         signupPage = new SignupPage(driver);
         mainPage = new MainPage(driver);

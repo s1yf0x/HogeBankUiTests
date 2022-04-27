@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import static io.github.bonigarcia.wdm.config.DriverManagerType.CHROME;
 
 public class ChromeDriverManager extends DriverManager {
+
     Configuration config = new Configuration();
 
     protected WebDriver createDriver() {

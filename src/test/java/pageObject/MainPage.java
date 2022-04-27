@@ -13,6 +13,10 @@ public class MainPage extends PageObject {
 
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
 
+    /**
+     * All locators not is best and application implemented so terrible. I would to ask developers add some additional
+     * attributes to needed elements for more stable tests
+     */
     private final By title = By.xpath("//h1[@class='center']");
     private final By btnDeposit = By.xpath("//a[@href][1]");
     private final By btnWithdraw = By.xpath("//a[@href][2]");

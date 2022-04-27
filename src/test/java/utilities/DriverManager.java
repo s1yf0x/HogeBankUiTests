@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.concurrent.TimeUnit;
 
 public abstract class DriverManager {
+
     protected ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
     protected abstract WebDriver createDriver();
 

@@ -13,8 +13,12 @@ public class LoginPage extends PageObject {
 
     WebDriverWait wait = new WebDriverWait(driver, config.getWaitTimeout());
 
+    /**
+     * All locators not is best and application implemented so terrible. I would to ask developers add some additional
+     * attributes to needed elements for more stable tests
+     */
     private final By title = By.xpath("//h1[@class='center']");
-    private final By fldUsername = By.xpath("//input[1]"); //Not the best locator, but let left it for first
+    private final By fldUsername = By.xpath("//input[1]");
     private final By fldPassword = By.xpath("//input[@type='password']");
     private final By btnSignup = By.xpath("//button[normalize-space()='SIGNUP']");
     private final By btnLogin = By.xpath("//button[normalize-space()='LOGIN']");
