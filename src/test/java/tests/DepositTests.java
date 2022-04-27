@@ -81,6 +81,6 @@ public class DepositTests extends BaseTest {
     public void invalidWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
         mainPage.clickToDeposit().typeDeposit(withdraw).clickDeposit();
-        Assert.assertEquals(depositPage.getLblErrorText(), config.getErrorWithdraw(), "Didn't get error about invalid username or password");
+        Assert.assertEquals(depositPage.getLblErrorText(), config.getErrorDeposit(), "Didn't get error about invalid username or password");
     }
 }
