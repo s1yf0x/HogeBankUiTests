@@ -22,7 +22,6 @@ public class WithdrawPage extends PageObject {
      * This part could be improved, but it required actions by developers. I would to ask developers add some additional
      * attributes to needed elements for more stable tests
      */
-    private final By title = By.xpath("//h1[@class='center']");
     private final By btnWithdraw = By.xpath("//button[normalize-space()='Withdraw']");
     private final By fldWithdraw = By.xpath("//div[@class='center']//input");
     private final By lblCommission = By.xpath("//span[4]");
@@ -30,8 +29,7 @@ public class WithdrawPage extends PageObject {
     private final By lblErrorFailed = By.xpath("//span[@color='red']");
 
     public double getCommission() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lblCommission));
-        return Double.parseDouble(driver.findElement(lblCommission).getText());
+        return Double.parseDouble(wait.until(ExpectedConditions.visibilityOfElementLocated(lblCommission)).getText());
     }
 
     public WithdrawPage typeWithdraw(String withdraw) {
@@ -61,8 +59,7 @@ public class WithdrawPage extends PageObject {
     }
 
     public String getLblErrorText() {
-        wait.until(ExpectedConditions.elementToBeClickable(lblErrorFailed));
-        return driver.findElement(lblErrorFailed).getText();
+        return wait.until(ExpectedConditions.elementToBeClickable(lblErrorFailed)).getText();
     }
 
 }

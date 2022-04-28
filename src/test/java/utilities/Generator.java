@@ -19,17 +19,17 @@ public class Generator {
         return faker.name().firstName();
     }
 
-    public String generatePassword(int len, boolean uppr, boolean lowr, boolean num) {
+    public String generatePassword(int len, boolean upper, boolean lower, boolean num) {
         CharacterRule upperCase = new CharacterRule(EnglishCharacterData.UpperCase);
         CharacterRule numbers = new CharacterRule(EnglishCharacterData.Digit);
         CharacterRule lowerCase = new CharacterRule(EnglishCharacterData.LowerCase);
 
         List<CharacterRule> rules = new ArrayList<>();
 
-        if (uppr) {
+        if (upper) {
             rules.add(upperCase);
         }
-        if (lowr) {
+        if (lower) {
             rules.add(lowerCase);
         }
         if (num) {

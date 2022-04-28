@@ -67,8 +67,14 @@ public class WithdrawTests extends BaseTest {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
         double startBalance = mainPage.getCurrentBalance();
-        double sumOfWithdrawAndCommission = mainPage.clickToWithdraw().typeWithdraw(withdraw).calculateFinalWithdraw(Double.parseDouble(withdraw));
-        double endBalance = withdrawPage.clickWithdraw().waitForRenewalBalance(startBalance).getCurrentBalance();
+        double sumOfWithdrawAndCommission = mainPage
+                .clickToWithdraw()
+                .typeWithdraw(withdraw)
+                .calculateFinalWithdraw(Double.parseDouble(withdraw));
+        double endBalance = withdrawPage
+                .clickWithdraw()
+                .waitForRenewalBalance(startBalance)
+                .getCurrentBalance();
 
         Assert.assertEquals(endBalance, startBalance-sumOfWithdrawAndCommission, "Balance after withdraw is correct");
     }
@@ -77,7 +83,10 @@ public class WithdrawTests extends BaseTest {
     public void checkCalculationFinalWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
-        double sumOfWithdrawAndCommission = mainPage.clickToWithdraw().typeWithdraw(withdraw).calculateFinalWithdraw(Double.parseDouble(withdraw));
+        double sumOfWithdrawAndCommission = mainPage
+                .clickToWithdraw()
+                .typeWithdraw(withdraw)
+                .calculateFinalWithdraw(Double.parseDouble(withdraw));
         double finalWithdraw = withdrawPage.getFinalWithdraw();
 
         Assert.assertEquals(finalWithdraw, sumOfWithdrawAndCommission, "Final withdraw calculated wrong");
@@ -87,7 +96,9 @@ public class WithdrawTests extends BaseTest {
     public void invalidWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
-        mainPage.clickToWithdraw().typeWithdraw(withdraw).clickWithdraw();
+        mainPage.clickToWithdraw()
+                .typeWithdraw(withdraw)
+                .clickWithdraw();
 
         Assert.assertEquals(withdrawPage.getLblErrorText(), config.getErrorWithdraw(), "Didn't get error about invalid username or password");
 

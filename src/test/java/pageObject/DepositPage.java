@@ -22,7 +22,6 @@ public class DepositPage extends PageObject {
      * This part could be improved, but it required actions by developers. I would to ask developers add some additional
      * attributes to needed elements for more stable tests
      */
-    private final By title = By.xpath("//h1[@class='center']");
     private final By btnDeposit = By.xpath("//button[normalize-space()='Deposit']"); //example for improvement <button data-test-id="deposit">Deposit</button>
     private final By fldDeposit = By.xpath("//div[@class='center']//input");
     private final By lblCommission = By.xpath("//span[4]");
@@ -30,8 +29,7 @@ public class DepositPage extends PageObject {
     private final By lblErrorFailed = By.xpath("//span[@color='red']");
 
     public double getCommission() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lblCommission));
-        return Double.parseDouble(driver.findElement(lblCommission).getText());
+        return Double.parseDouble(wait.until(ExpectedConditions.visibilityOfElementLocated(lblCommission)).getText());
     }
 
     public DepositPage typeDeposit(String withdraw) {
@@ -40,7 +38,7 @@ public class DepositPage extends PageObject {
     }
 
     private double calculateCommission(double withdraw) {
-        return withdraw*(config.getWithdrawCommission()/100);
+        return withdraw*(config.getDepositCommission()/100);
     }
 
     public boolean checkCommission(double withdraw) {
@@ -61,7 +59,6 @@ public class DepositPage extends PageObject {
     }
 
     public String getLblErrorText() {
-        wait.until(ExpectedConditions.elementToBeClickable(lblErrorFailed));
-        return driver.findElement(lblErrorFailed).getText();
+        return wait.until(ExpectedConditions.elementToBeClickable(lblErrorFailed)).getText();
     }
 }

@@ -57,30 +57,45 @@ public class DepositTests extends BaseTest {
     @Test(groups = "Deposit", dataProvider = "getWithdraw",  description = "Test for calculating withdraw")
     public void checkCalculationCommission(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
+
         Assert.assertTrue(mainPage.clickToDeposit().typeDeposit(withdraw).checkCommission(Double.parseDouble(withdraw)), "Commission calculated wrong");
     }
 
     @Test(groups = "Deposit", dataProvider = "getWithdraw",  description = "Test for balance after withdraw")
     public void checkAccountBalance(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
+
         double startBalance = mainPage.getCurrentBalance();
-        double finalDeposit = mainPage.clickToDeposit().typeDeposit(withdraw).calculateFinalDeposit(Double.parseDouble(withdraw));
+        double finalDeposit = mainPage
+                .clickToDeposit()
+                .typeDeposit(withdraw)
+                .calculateFinalDeposit(Double.parseDouble(withdraw));
         double endBalance = depositPage.clickDeposit().waitForRenewalBalance(startBalance).getCurrentBalance();
+
         Assert.assertEquals(endBalance, startBalance+finalDeposit, "Balance after deposit isn't correct");
     }
 
     @Test(groups = "Deposit", dataProvider = "getWithdraw",  description = "Test for balance after withdraw")
     public void checkCalculationFinalWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
-        double finaCalculatedDeposit = mainPage.clickToDeposit().typeDeposit(withdraw).calculateFinalDeposit(Double.parseDouble(withdraw));
+
+        double finaCalculatedDeposit = mainPage
+                .clickToDeposit()
+                .typeDeposit(withdraw)
+                .calculateFinalDeposit(Double.parseDouble(withdraw));
         double finalDeposit = depositPage.getFinalDeposit();
+
         Assert.assertEquals(finalDeposit, finaCalculatedDeposit, "Final deposit calculated wrong");
     }
 
     @Test(groups = "Deposit", dataProvider = "getInvalidWithdraw",  description = "Test for getting error with invalid withdraw")
     public void invalidWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
-        mainPage.clickToDeposit().typeDeposit(withdraw).clickDeposit();
+
+        mainPage.clickToDeposit()
+                .typeDeposit(withdraw)
+                .clickDeposit();
+
         Assert.assertEquals(depositPage.getLblErrorText(), config.getErrorDeposit(), "Didn't get error about invalid username or password");
     }
 }
