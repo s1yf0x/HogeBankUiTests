@@ -57,7 +57,7 @@ public class SignUpTests extends BaseTest {
         Assert.assertEquals(mainPage.getLblUsername(), userValid.getUsername(), "User not logged after signup or show invalid username of Main page");
     }
 
-    @Test(groups = "SignUp", dataProvider = "getCredentials",  description = "Negative test for signup process")
+    @Test(groups = "SignUp", dataProvider = "getCredentials", description = "Negative test for signup process")
     public void negativeSignUpTests(String username, String password, String expectedResult) {
         signupPage.signupThenLogin(username, password);
 

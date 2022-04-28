@@ -63,6 +63,7 @@ public class Configuration {
     public double getWithdrawCommission() {
         return Double.parseDouble(properties.getProperty("withdrawCommission"));
     }
+
     public double getDepositCommission() {
         return Double.parseDouble(properties.getProperty("depositCommission"));
     }

@@ -55,14 +55,14 @@ public class WithdrawTests extends BaseTest {
                 {"text"}};
     }
 
-    @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for calculating withdraw")
+    @Test(groups = "Withdraw", dataProvider = "getWithdraw", description = "Test for calculating withdraw")
     public void checkCalculationCommission(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
         Assert.assertTrue(mainPage.clickToWithdraw().typeWithdraw(withdraw).checkCommission(Double.parseDouble(withdraw)), "Commission calculated wrong");
     }
 
-    @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for balance after withdraw")
+    @Test(groups = "Withdraw", dataProvider = "getWithdraw", description = "Test for balance after withdraw")
     public void checkAccountBalance(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
@@ -76,10 +76,10 @@ public class WithdrawTests extends BaseTest {
                 .waitForRenewalBalance(startBalance)
                 .getCurrentBalance();
 
-        Assert.assertEquals(endBalance, startBalance-sumOfWithdrawAndCommission, "Balance after withdraw is correct");
+        Assert.assertEquals(endBalance, startBalance - sumOfWithdrawAndCommission, "Balance after withdraw is correct");
     }
 
-    @Test(groups = "Withdraw", dataProvider = "getWithdraw",  description = "Test for balance after withdraw")
+    @Test(groups = "Withdraw", dataProvider = "getWithdraw", description = "Test for balance after withdraw")
     public void checkCalculationFinalWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 
@@ -92,7 +92,7 @@ public class WithdrawTests extends BaseTest {
         Assert.assertEquals(finalWithdraw, sumOfWithdrawAndCommission, "Final withdraw calculated wrong");
     }
 
-    @Test(groups = "Withdraw", dataProvider = "getInvalidWithdraw",  description = "Test for getting error with invalid withdraw")
+    @Test(groups = "Withdraw", dataProvider = "getInvalidWithdraw", description = "Test for getting error with invalid withdraw")
     public void invalidWithdraw(String withdraw) {
         signupPage.signupThenLogin(userValid.getUsername(), userValid.getPassword());
 

@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WithdrawPage extends PageObject {
 
     /**
-     *     Decide not to create parent class for DepositPage.class and for WithdrawPage.class despite the similarity
-     *     'cause they can change and become completely different
+     * Decide not to create parent class for DepositPage.class and for WithdrawPage.class despite the similarity
+     * 'cause they can change and become completely different
      */
 
     public WithdrawPage(WebDriver driver) {
@@ -38,11 +38,11 @@ public class WithdrawPage extends PageObject {
     }
 
     private double calculateCommission(double withdraw) {
-        return withdraw*(config.getWithdrawCommission()/100);
+        return withdraw * (config.getWithdrawCommission() / 100);
     }
 
     public boolean checkCommission(double withdraw) {
-        return getCommission()==calculateCommission(withdraw);
+        return getCommission() == calculateCommission(withdraw);
     }
 
     public MainPage clickWithdraw() {
@@ -51,7 +51,7 @@ public class WithdrawPage extends PageObject {
     }
 
     public double calculateFinalWithdraw(double withdraw) {
-        return getCommission()+withdraw;
+        return getCommission() + withdraw;
     }
 
     public double getFinalWithdraw() {
